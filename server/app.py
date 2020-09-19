@@ -5,6 +5,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 HOST="0.0.0.0"
+TOKEN = None
 
 @app.route('/', methods=['GET'])
 def home():

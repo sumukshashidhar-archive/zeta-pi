@@ -2,12 +2,13 @@ import flask
 import mainreq as ms
 import PiCamera
 
+import jw
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 HOST="0.0.0.0"
-global TOKEN = None
+TOKEN = None
 
 name = "raspi"
 pw = "raspi"
@@ -19,34 +20,21 @@ def home():
         "message": "Pi Server is Running"
     })
 
-@app.route('/api/snap', methods=['GET'])
+@app.route('/api/snap', methods=['POST'])
 def snap_picture():
-	#if TOKEN == None:
-	#	TOKEN = ms.getToken()
-		url = "http://40.76.37.214:80/api/upload/image"
-		data = {}
-		global TOKEN
-		camera = PiCamera()
-
-		camera.capture('/home/pi/Desktop/capture.jpg')
-		
-		obj = {
-			"token" = TOKEN
-		}
-		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
-	camera = PiCamera()
-	camera.capture('/home/pi/Desktop/capture.jpg')
-
-	r = requests.post(
-		url ="http://40.76.37.214:80/api/upload/image",
-		data = {
-		"token" = TOKEN
-		}, 
-		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
-	)
-
-	print(r)
-
+	# check if the token is sent in with the request first
+	try:
+		token = flask.request.form['token']
+	except:
+		return flask.jsonify({
+            "message":"Auth Required"
+        }), 401
+	try:
+		response = jw.decode(token)
+	except:
+		return flask.jsonify({
+            "message":"JWT Deserialization Failed"
+        }), 500
 
 
 if __name__ == "__main__":

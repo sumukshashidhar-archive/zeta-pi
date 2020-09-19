@@ -1,4 +1,6 @@
 import flask
+import mainreq as ms
+import PiCamera
 
 
 app = flask.Flask(__name__)
@@ -16,12 +18,24 @@ def home():
 
 @app.route('/api/snap', methods=['GET'])
 def snap_picture():
-	"""
-	Upon calling the API route /api/snap from somewhere else, 
-	there should be an image snapped on the pi's camera,
-	and uploaded to the azure server. 
-	"""
-	pass
+	#if TOKEN == None:
+	#	TOKEN = ms.getToken()
+		url = "http://40.76.37.214:80/api/upload/image"
+		data = {}
+		TOKEN
+		camera = PiCamera()
+
+		camera.capture('/home/pi/Desktop/capture.jpg')
+		
+		obj = {
+			"token" = TOKEN
+		}
+		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
+
+		r = requests.post(url,data = obj, files = files)
+
+		print(r)
+
 
 
 if __name__ == "__main__":

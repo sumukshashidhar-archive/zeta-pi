@@ -22,7 +22,7 @@ def snap_picture():
 	#	TOKEN = ms.getToken()
 		url = "http://40.76.37.214:80/api/upload/image"
 		data = {}
-		TOKEN
+		global TOKEN
 		camera = PiCamera()
 
 		camera.capture('/home/pi/Desktop/capture.jpg')

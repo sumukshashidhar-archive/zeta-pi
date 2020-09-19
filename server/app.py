@@ -21,9 +21,19 @@ def home():
 
 @app.route('/api/snap', methods=['GET'])
 def snap_picture():
-	if TOKEN == None:
-		TOKEN = ms.getToken(name,pw)
+	#if TOKEN == None:
+	#	TOKEN = ms.getToken()
+		url = "http://40.76.37.214:80/api/upload/image"
+		data = {}
+		global TOKEN
+		camera = PiCamera()
 
+		camera.capture('/home/pi/Desktop/capture.jpg')
+		
+		obj = {
+			"token" = TOKEN
+		}
+		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
 	camera = PiCamera()
 	camera.capture('/home/pi/Desktop/capture.jpg')
 

@@ -4,7 +4,7 @@ This module validates token
 
 import requests
 
-AUTHENTICATION_URL="http://0.0.0.0:3000/api/authenticate"
+AUTHENTICATION_URL="http://40.76.37.214:3000/api/authenticate"
 
 def validate_token(token):
 

@@ -7,7 +7,10 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 HOST="0.0.0.0"
-TOKEN = None
+global TOKEN = None
+
+name = "raspi"
+pw = "raspi"
 
 @app.route('/', methods=['GET'])
 def home():
@@ -31,10 +34,18 @@ def snap_picture():
 			"token" = TOKEN
 		}
 		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
+	camera = PiCamera()
+	camera.capture('/home/pi/Desktop/capture.jpg')
 
-		r = requests.post(url,data = obj, files = files)
+	r = requests.post(
+		url ="http://40.76.37.214:80/api/upload/image",
+		data = {
+		"token" = TOKEN
+		}, 
+		files = {'image':open('/home/pi/Desktop/capture.jpg','rb')}
+	)
 
-		print(r)
+	print(r)
 
 
 

@@ -16,8 +16,9 @@ def home():
 @app.route('/api/snap', methods=['GET'])
 def snap_picture():
 	"""
-	Write code here to snap a picture on the raspberry pi.
-	And send it to the main azure server
+	Upon calling the API route /api/snap from somewhere else, 
+	there should be an image snapped on the pi's camera,
+	and uploaded to the azure server. 
 	"""
 	pass
 

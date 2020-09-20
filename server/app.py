@@ -1,6 +1,6 @@
 import flask
 import mainreq as ms
-import PiCamera
+import picamera
 import jw
 
 
@@ -8,7 +8,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 HOST="0.0.0.0"
-global TOKEN = None
+TOKEN = None
 
 name = "raspi"
 pw = "raspi"
@@ -23,6 +23,7 @@ def home():
 @app.route('/api/snap', methods=['GET'])
 def snap_picture():
 	i = 0
+	global TOKEN
 	if TOKEN == None:
 		TOKEN = ms.getToken(name,pw)
 

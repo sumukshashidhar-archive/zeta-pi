@@ -1,4 +1,5 @@
 import flask
+import requests
 import mainreq as ms
 from picamera import PiCamera
 import jw
@@ -6,6 +7,8 @@ import jw
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+
+camera = PiCamera()
 
 HOST="0.0.0.0"
 TOKEN = None
@@ -42,7 +45,7 @@ def snap_picture():
 		print(r)
 	else:
 		print("Invalid token")	
-
+	return 'picture taken'
 
 
 if __name__ == "__main__":

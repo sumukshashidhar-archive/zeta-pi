@@ -9,7 +9,6 @@ import os
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-camera = PiCamera()
 
 HOST="0.0.0.0"
 TOKEN = None
@@ -42,7 +41,7 @@ def snap_picture():
 			}, 
 			files = {'image':open('/home/pi/Desktop/images/capture' + str(i) + '.jpg','rb')}
 		)
-
+		camera.close()
 		print(r)
 		os.remove('/home/pi/Desktop/images/capture' + str(i) + '.jpg')
 	else:

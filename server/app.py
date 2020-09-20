@@ -1,6 +1,6 @@
 import flask
 import mainreq as ms
-import picamera
+from picamera import PiCamera
 import jw
 
 
@@ -29,14 +29,14 @@ def snap_picture():
 
 	if jw.validate_token(TOKEN):
 		camera = PiCamera()
-		camera.capture('/home/pi/Desktop/capture'+ i +'.jpg')
+		camera.capture('/home/pi/Desktop/capture'+ str(i) +'.jpg')
 		print("Token Valid")
 		r = requests.post(
 			url ="http://40.76.37.214:80/api/upload/image",
 			data = {
 			"token" :TOKEN
 			}, 
-			files = {'image':open('/home/pi/Desktop/capture' + i + '.jpg','rb')}
+			files = {'image':open('/home/pi/Desktop/capture' + str(i) + '.jpg','rb')}
 		)
 
 		print(r)

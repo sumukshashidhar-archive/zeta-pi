@@ -28,13 +28,13 @@ def snap_picture():
 		TOKEN = ms.getToken(name,pw)
 
 	if jw.validate_token(TOKEN):
- 		camera = PiCamera()
-		camera.capture('/home/pi/Desktop/capture' + i + '.jpg')
+		camera = PiCamera()
+		camera.capture('/home/pi/Desktop/capture'+ i +'.jpg')
 		print("Token Valid")
 		r = requests.post(
 			url ="http://40.76.37.214:80/api/upload/image",
 			data = {
-			"token" = TOKEN
+			"token" :TOKEN
 			}, 
 			files = {'image':open('/home/pi/Desktop/capture' + i + '.jpg','rb')}
 		)

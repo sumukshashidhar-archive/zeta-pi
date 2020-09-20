@@ -11,6 +11,7 @@ app.config["DEBUG"] = True
 
 
 HOST="0.0.0.0"
+PORT=80
 TOKEN = None
 
 name = "raspi"
@@ -50,4 +51,4 @@ def snap_picture():
 
 
 if __name__ == "__main__":
-	app.run(host=HOST)
+	app.run(host=HOST, port=PORT)
